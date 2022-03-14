@@ -1,5 +1,7 @@
 //////////////рандомные видео с ютуба по одному клику
 
+import { validateLocaleAndSetLanguage } from "typescript";
+
 
 
 // const msg: string = 'Hello world';
@@ -9,7 +11,7 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const fs = require('fs');
-//gS54xMvGPoGc0jYs
+const Model = require('./models/model');
 
 const crt = '../crt/X509-cert-8299923995313901438.cer';
 //const crt2 = fs.readFileSync(crt);
@@ -131,9 +133,9 @@ function storeToken(token) {
  *
  * @param {google.auth.OAuth2} auth An authorized OAuth2 client.
  */
- function getRandomInt(max) {
+function getRandomInt(max) {
     return Math.floor(Math.random() * max);
-  }
+}
 
 var _id: string = '';
 var _ids = [];
@@ -167,7 +169,22 @@ function getVideo(auth) {
             _id = _ids[getRandomInt(_ids.length)];
             console.log(`link for "random" embed video: https://www.youtube.com/embed/${_id}`);
             console.log(_ids);
-            
+
+            videos.forEach(element => {
+                var model = new Model({
+                    kind: element.kind,
+                    etag: element.etag,
+                    id: element.id,
+                    snippet: element.snippet,
+                    contentDetails: element.contentDetails,
+                    statistics: element.statistics
+                });
+                model.save()
+                    .then(result => console.log(result))
+                    .catch(err => console.log(err));
+            })
+
+
         }
     });
 }
@@ -175,3 +192,8 @@ function getVideo(auth) {
 app.get('/', (req, res) => {
     res.render('index', { video_id: _ids[getRandomInt(_ids.length)] });
 });
+
+
+app.get('/stats', (req, res) => {
+    res.render('stats');
+})

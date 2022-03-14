@@ -1,0 +1,46 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--  <link rel="stylesheet" href="/styles.css">-->
+    <title>YouRandom | stats</title>
+</head>
+
+<body>
+    <div id="nav">
+        <nav>
+
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/stats">Stats</a></li>
+
+            </ul>
+        </nav>
+    </div>
+    <div id="chart"></div>
+    <script src="https://unpkg.com/@mongodb-js/charts-embed-dom"></script>
+
+    <script>
+        const ChartsEmbedSDK = window.ChartsEmbedSDK;
+
+        const sdk = new ChartsEmbedSDK({
+            baseUrl: 'https://charts.mongodb.com/charts-project-0-grcjq',
+        });
+        const chart = sdk.createChart({
+            chartId: '622fc4f8-56bd-4516-8b08-d8c93ebebb0f',
+        });
+        // render the chart into a container
+        chart
+            .render(document.getElementById('chart'))
+            .catch(() => window.alert('Chart failed to initialise'));
+
+        // refresh the chart whenever #refreshButton is clicked
+        document
+            .getElementById('refreshButton')
+            .addEventListener('click', () => chart.refresh());
+    </script>
+
+</body>
+
+</html>

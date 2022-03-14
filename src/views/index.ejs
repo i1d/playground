@@ -8,14 +8,26 @@
 </head>
 
 <body>
+  <div id="nav">
+    <nav>
 
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/stats">Stats</a></li>
+
+        </ul>
+    </nav>
+</div>
 
   <div class="youtube content">
     <h2>press "refresh" for random video | <%= video_id %></h2>
     <a href="http://localhost:3000/">
       <button>refresh</button></a>
   </div>
-  <div id="iframeDisplay"><iframe width="560" height="315" src="https://www.youtube.com/embed/<%= video_id %>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+  <div id="iframeDisplay"><iframe width="560" height="315" src="https://www.youtube.com/embed/<%= video_id %>"
+      title="YouTube video player" frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen></iframe></div>
 
 
 </body>

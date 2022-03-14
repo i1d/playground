@@ -172,8 +172,6 @@ function getVideo(auth) {
     });
 }
 
-
-
 app.get('/', (req, res) => {
     res.render('index', { video_id: _ids[getRandomInt(_ids.length)] });
 });
